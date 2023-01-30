@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+
+    <style>
+
+        .button {
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 8px 18px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid crimson;
+        }
+
+        .button2:hover {
+            background-color: crimson;
+            color: white;
+        }
+
+        label, p, title{
+            font-family: Besley;
+            font-weight: lighter;
+        }
+
+
+    </style>
+</head>
+<body> <div style="text-align: center">
+<div th:if="${param.error}">
+    <p th:text="${session.error}" th:unless="${session == null}">[...]</p>
+</div>
+<div th:if="${param.logout}">You have been logged out.</div>
+<form th:action="@{/login}" method="post">
+   <div style="margin: 10px">
+      <label > Email Address : <input type="text" name="username" /> </label>
+</div>
+<div style="margin: 10px">
+    <label > Password: <input style="margin-left: 36px" type="password" name="password" /> </label>
+</div>
+<div>
+    <input style="margin-left: 10px" class="registerbtn button button1" type="submit" value="Sign In" />
+    <a href="register"> <input style="margin-left: 15px" class="registerbtn button button2" type="button" value="Register" /> </a> </div>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,622 @@
+openapi: 3.0.1
+info:
+  title: Ticket Planner API
+  description: Ticket Planner Main API Information
+  version: "1.0"
+servers:
+- url: http://localhost:8701
+  description: Generated server url
+paths:
+  /api/voyages/deactivate/{id}:
+    put:
+      tags:
+      - voyage-controller
+      operationId: deactivateVoyage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VoyageResponse'
+      security:
+      - ticketplanner-api: []
+  /api/tickets/{ticketId}:
+    put:
+      tags:
+      - ticket-controller
+      operationId: updateTicket
+      parameters:
+      - name: ticketId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+      security:
+      - ticketplanner-api: []
+    delete:
+      tags:
+      - ticket-controller
+      operationId: deleteTicketById
+      parameters:
+      - name: ticketId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+      security:
+      - ticketplanner-api: []
+  /api/voyages:
+    get:
+      tags:
+      - voyage-controller
+      operationId: getVoyages
+      parameters:
+      - name: originCity
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: destinationCity
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: travelType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: voyageDateTime
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoyageResponse'
+      security:
+      - ticketplanner-api: []
+    post:
+      tags:
+      - voyage-controller
+      operationId: createVoyage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoyageRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VoyageResponse'
+      security:
+      - ticketplanner-api: []
+  /api/users:
+    post:
+      tags:
+      - user-controller
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+  /api/tickets/{voyageId}:
+    post:
+      tags:
+      - ticket-controller
+      operationId: createTicket
+      parameters:
+      - name: voyageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+      security:
+      - ticketplanner-api: []
+  /api/booking:
+    post:
+      tags:
+      - booking-controller
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookingResponse'
+  /api/booking/payment:
+    post:
+      tags:
+      - booking-controller
+      operationId: payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Invoice'
+  /api/voyages/totalTicketsSold/{id}:
+    get:
+      tags:
+      - voyage-controller
+      operationId: getTotalTicketNumbersSold
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int32
+      security:
+      - ticketplanner-api: []
+  /api/voyages/totalEarnings/{id}:
+    get:
+      tags:
+      - voyage-controller
+      operationId: getTotalEarninsgOfVoyage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: number
+                format: double
+      security:
+      - ticketplanner-api: []
+  /api/tickets/byTelNo/{telephoneNumber}:
+    get:
+      tags:
+      - ticket-controller
+      operationId: getAllByTelephoneNumber
+      parameters:
+      - name: telephoneNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TicketResponse'
+      security:
+      - ticketplanner-api: []
+  /api/tickets/byId/{ticketId}:
+    get:
+      tags:
+      - ticket-controller
+      operationId: getTicketById
+      parameters:
+      - name: ticketId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+      security:
+      - ticketplanner-api: []
+  /api/booking/{bookingId}:
+    get:
+      tags:
+      - booking-controller
+      operationId: getBookingById
+      parameters:
+      - name: bookingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookingResponse'
+  /api/voyages/delete/{id}:
+    delete:
+      tags:
+      - voyage-controller
+      operationId: deleteVoyage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VoyageResponse'
+      security:
+      - ticketplanner-api: []
+components:
+  schemas:
+    VoyageResponse:
+      type: object
+      properties:
+        originCity:
+          type: string
+        destinationCity:
+          type: string
+        voyageDateTime:
+          type: string
+        availableSeat:
+          type: integer
+          format: int32
+        travelType:
+          type: string
+          enum:
+          - PLANE
+          - BUS
+        price:
+          type: number
+          format: double
+    TicketRequest:
+      type: object
+      properties:
+        citizenshipNumber:
+          type: string
+        passengerFirstName:
+          type: string
+        passengerMiddleName:
+          type: string
+        passengerLastName:
+          type: string
+        gender:
+          type: string
+          enum:
+          - MALE
+          - FEMALE
+    TicketResponse:
+      type: object
+      properties:
+        citizenshipNumber:
+          type: string
+        passengerFirstName:
+          type: string
+        passengerMiddleName:
+          type: string
+        passengerLastName:
+          type: string
+        gender:
+          type: string
+          enum:
+          - MALE
+          - FEMALE
+        price:
+          type: number
+          format: double
+        voyageOriginCity:
+          type: string
+        voyageDestinationCity:
+          type: string
+        voyageDateTime:
+          type: string
+          format: date-time
+        voyageTravelType:
+          type: string
+          enum:
+          - PLANE
+          - BUS
+    VoyageRequest:
+      type: object
+      properties:
+        originCity:
+          type: string
+        destinationCity:
+          type: string
+        voyageDateTime:
+          type: string
+        travelType:
+          type: string
+          enum:
+          - PLANE
+          - BUS
+        price:
+          type: number
+          format: double
+    UserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        telephoneNumber:
+          type: string
+        gender:
+          type: string
+          enum:
+          - MALE
+          - FEMALE
+        passengerType:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - CORPORATE
+    UserResponse:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        telephoneNumber:
+          type: string
+    BookingRequest:
+      type: object
+      properties:
+        bookingPassengerEmail:
+          type: string
+        bookingTicketRequestList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketRequest'
+        bookingOriginCity:
+          type: string
+        bookingDestinationCity:
+          type: string
+        bookingVoyageDateTime:
+          type: string
+        bookingTravelType:
+          type: string
+          enum:
+          - PLANE
+          - BUS
+    BookingResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        passengerTelephoneNumber:
+          type: string
+        ticketResponseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketResponse'
+        creationDateTime:
+          type: string
+          format: date-time
+        bookingTotalPrice:
+          type: number
+          format: double
+    PaymentRequest:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+          format: int32
+        paymentType:
+          type: string
+    Invoice:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+          format: int32
+        paymentType:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        telephoneNumber:
+          type: string
+        paymentAmount:
+          type: number
+          format: double
