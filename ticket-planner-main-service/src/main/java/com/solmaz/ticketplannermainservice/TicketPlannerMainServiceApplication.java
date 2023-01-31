@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Ticket Planner API", version = "1.0", description = "Ticket Planner Main API Information"))
+@OpenAPIDefinition(info = @Info(title = "Ticket Planner API", version = "1.0", description = "Ticket Planner App - Kodluyoruz & Solmaz"))
 //@SecurityScheme(name = "ticketplanner-api", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class TicketPlannerMainServiceApplication {
 	public static void main(String[] args) {

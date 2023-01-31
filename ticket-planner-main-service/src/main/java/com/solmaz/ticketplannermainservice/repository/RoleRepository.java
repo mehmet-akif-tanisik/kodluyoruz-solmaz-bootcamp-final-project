@@ -1,6 +1,5 @@
 package com.solmaz.ticketplannermainservice.repository;
 
-import com.solmaz.ticketplannermainservice.model.enums.RoleName;
 import com.solmaz.ticketplannermainservice.model.user.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

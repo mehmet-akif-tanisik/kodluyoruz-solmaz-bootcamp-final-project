@@ -2,36 +2,62 @@
 
 ## Kodluyoruz X Solmaz Final Project
 
+### Process Chart of All Services 
+
 
 <img src="images/project-diagram.png" alt="Java"  />
 
 ### About Project
 
-PRoje ile alakalı bilgiler.
+The subject of this project is to build the system for online bus and ticket sales with java and spring boot.
 
-### UML diagram
+### System Requirements
 
-<img src="images/uml-diagram.png" alt="uml-diagram"  />
+• Users must be able to register and login to the system.
+• After the user registration, an e-mail should be sent.
+• The user password must be saved in the database with a hashing algorithm of your choice.
+• The admin user can add new flights, cancel them, see the total ticket sales and the total price obtained from this sale.
+• Users should be able to search for all flights with city, vehicle type (plane & bus) or date information.
+• An individual user can purchase a maximum of 5 tickets for the same trip.
+• Individual users can purchase tickets for a maximum of 2 male passengers in a single order.
+• A corporate user can purchase a maximum of 20 tickets for the same trip.
+• If the purchase is successful, the transaction should be completed and the ticket details should be sent asynchronously via sms to the user's phone number.
+• Only database registration is sufficient for sending SMS, mail and push notifications. But these operations should be done through a single Service (application) and with polymorphic behavior.
+• Users should be able to see the tickets they bought.
+
+### System Acceptances
+Users can be individual or corporate.
+SMS, Mail and Push Notification sending processes must be Asynchronous.
+Aircraft passenger capacity: 189
+Bus passenger capacity: 45
+Payment method can only be Credit card and Money Order / EFT.
+Payment Service transactions must be Synchronous.
+
+### ER Diagram of Services
+
+<img src="images/er-diagram.png" alt="uml-diagram"  />
 
 
 <!-- TECHNOLOGIES -->
 
 ### Technologies Used
 
-<a href="https://www.java.com/" target="_blank"><img src="images/java.svg" alt="Java" height="70" /></a><a href="https://spring.io" target="_blank"><img src="images/spring-logo.svg" alt="Java" height="50" /></a></a><a href="https://www.postgresql.org/" target="_blank"><img src="images/postgre-logo.svg" alt="Java" height="40" /></a>     <a href="https://www.postgresql.org/" target="_blank"><img src="images/docker.svg" alt="Java" height="50" /></a>     
-
- <a href="https://www.mongodb.com" target="_blank"><img src="images/mongo-logo.svg" alt="Java" height="50" /></a>  <a href="https://www.rabbitmq.com/" target="_blank"><img src="images/rabbit-logo.svg" alt="Java" height="20" /></a>
- 
- 
+<img src="images/logos.png" alt="uml-diagram"  />
 
 <!-- OUTPUT SCREENSHOTS -->
 
-### Codes & Outputs of Questions
+### Login & Register Page of Application
 
-#### You can find the code, detailed explanations and output screenshots related to the questions in sub folders of week2 directory.
+<img src="images/login-page.png" alt="uml-diagram"  />
+<hr>
+<img src="images/register-page.png" alt="uml-diagram"  />
+
+
+### Swagger Page of Application
+
+<img src="images/swagger-page.png" alt="uml-diagram"  />
 
 <!-- LICENSE -->
-<a href="https://www.java.com/" target="_blank"><img src="images/resim.jpg" alt="Java" height="80" /></a>
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -59,7 +85,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <br />
 
-## Java Bootcamp - Kodluyoruz & Solmaz
+## Java & Spring Boot | Bootcamp - Kodluyoruz & Solmaz
 
 <div align="center">
   <a href="https://www.solmaz.com">
